@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AddUserForm from './forms/AddUserForm'
 import UserTable from './tables/UserTable'
 
 const App = () => {
@@ -10,19 +11,25 @@ const App = () => {
 
   const [users, setUsers] = useState(usersData)
 
+  const addUser = user => {
+    user.id = user.length + 1
+    setUsers([...users, user])
+  }
+
   return (
-    <div className="container">
+    <div className="container" >
       <h1>CRUD App with Hooks</h1>
       <div className="flex-row">
         <div className="flex-large">
           <h2>Add user</h2>
+          <AddUserForm addUser={addUser} />
         </div>
         <div className="flex-large">
           <h2>View users</h2>
           <UserTable users={users} />
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
